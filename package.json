@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "dev": "nodemon",
-    "start": "probot run ./src/index.js",
+    "start": "probot run ./index.js",
     "lint": "prettier --write **/*",
     "test": "prettier --check **/* && jest",
     "test:watch": "jest --watch --notify --notifyMode=change --coverage"
