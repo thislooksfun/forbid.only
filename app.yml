@@ -1,0 +1,44 @@
+# This is a GitHub App Manifest. These settings will be used by default when
+# initially configuring your GitHub App.
+#
+# NOTE: changing this file will not update your GitHub App settings.
+# You must visit github.com/settings/apps/your-app-name to edit them.
+#
+# Read more about configuring your GitHub App:
+# https://probot.github.io/docs/development/#configuring-a-github-app
+#
+# Read more about GitHub App Manifests:
+# https://developer.github.com/apps/building-github-apps/creating-github-apps-from-a-manifest/
+
+# The list of events that forbid.only subscribes to
+default_events:
+  - pull_request
+
+default_permissions:
+  # forbid.only is creating check runs, hence write permission for check runs is required
+  # https://developer.github.com/v3/apps/permissions/#permission-on-checks
+  checks: write
+
+  # This is read by default: search repositories, list collaborators, and access repository metadata.
+  # https://developer.github.com/v3/apps/permissions/#metadata-permissions
+  metadata: read
+
+  # forbid.only needs to check commit messages on private repositories
+  # https://developer.github.com/v3/apps/permissions/#permission-on-pull-requests
+  pull_requests: read
+
+  # forbid.only is using the `.github/forbid.only.yml` file for configuration
+  # https://developer.github.com/v3/apps/permissions/#permission-on-single-file
+  single_file: read
+
+# The name of the GitHub App. Defaults to the name specified in package.json
+name: forbid.only
+
+# The homepage of your GitHub App.
+url: https://example.com/
+
+# A description of the GitHub App.
+description: Forbid pull requests that still have .only tests in them
+# Set to true when your GitHub App is available to the public or false when it is only accessible to the owner of the app.
+# Default: true
+# public: false

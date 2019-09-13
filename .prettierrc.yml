@@ -1,0 +1,11 @@
+# Options documented at https://prettier.io/docs/en/options.html
+tabWidth: 2
+useTabs: false
+semi: true
+# singleQuote: true
+# quoteProps: as-needed
+trailingComma: es5
+bracketSpacing: true
+arrowParens: avoid
+htmlWhitespaceSensitivity: css
+endOfLine: lf
