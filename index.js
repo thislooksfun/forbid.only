@@ -1,7 +1,11 @@
 const initRepos = require("./lib/init-repos");
 const processPR = require("./lib/process-pr");
+const glitch = require("./lib/glitch");
 
 module.exports = robot => {
+  // Register glitch events
+  glitch(robot);
+
   // Keep a handy log of all events
   robot.on("*", c => c.log(`Got event of type ${c.name}`));
 
