@@ -15,7 +15,7 @@
   "scripts": {
     "dev": "nodemon",
     "start": "probot run ./index.js",
-    "test": "prettier --check **/* && jest",
+    "test": "jest",
     "test:watch": "jest --watch --notify --notifyMode=change --coverage",
     "prettier:check": "prettier --check '**/*'",
     "prettier:fix": "prettier --write '**/*'"
@@ -29,6 +29,7 @@
     "probot": "^7.2.0"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
     "jest": "^25.1.0",
     "nock": "^11.7.2",
     "nodemon": "^2.0.2",
