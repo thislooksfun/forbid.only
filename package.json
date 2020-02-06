@@ -15,9 +15,10 @@
   "scripts": {
     "dev": "nodemon",
     "start": "probot run ./index.js",
-    "lint": "prettier --write **/*",
     "test": "prettier --check **/* && jest",
-    "test:watch": "jest --watch --notify --notifyMode=change --coverage"
+    "test:watch": "jest --watch --notify --notifyMode=change --coverage",
+    "prettier:check": "prettier --check '**/*'",
+    "prettier:fix": "prettier --write '**/*'"
   },
   "dependencies": {
     "acorn": "^7.1.0",
