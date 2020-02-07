@@ -1,6 +1,6 @@
 {
   "name": "forbid.only",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Forbid pull requests that still have .only tests in them",
   "author": "thislooksfun <thislooksfun@repbot.org> (https://github.com/thislooksfun/forbid.only)",
   "license": "ISC",
