@@ -3,7 +3,7 @@ const path = require("path");
 const nock = require("nock");
 // Requiring our app implementation
 const myProbotApp = require("../..");
-const { Probot } = require("probot");
+const { Probot, createProbot } = require("probot");
 // Requiring our common fixtures
 const checkStatusStarted = require("../fixtures/check_status.started");
 
@@ -19,12 +19,8 @@ describe.each(["opened", "reopened", "synchronize"])(
     let probot;
 
     beforeEach(() => {
-      probot = new Probot({});
-      // Load our app into probot
-      const app = probot.load(myProbotApp);
-
-      // just return a test token
-      app.app = () => "test";
+      probot = createProbot({ id: 1, cert: "test", githubToken: "test" });
+      probot.load(myProbotApp);
     });
 
     // Split common check run pattern into helper function
