@@ -1,53 +1,109 @@
+const fs = require("fs");
+const path = require("path");
 const nock = require("nock");
 // Requiring our app implementation
 const myProbotApp = require("../..");
 const { Probot } = require("probot");
-// Requiring our fixtures
-const checkSuitePayload = require("../fixtures/check_suite.requested");
-const checkRunSuccess = require("../fixtures/check_run.created");
+// Requiring our common fixtures
+const checkStatusStarted = require("../fixtures/check_status.started");
 
 nock.disableNetConnect();
 
-describe("My Probot app", () => {
-  let probot;
+const repo = "/repos/thislooksfun/f.o.testing";
 
-  beforeEach(() => {
-    probot = new Probot({});
-    // Load our app into probot
-    const app = probot.load(myProbotApp);
+describe.each(["opened", "reopened", "synchronize"])(
+  "pull_request.%s",
+  action => {
+    const payload = require(`../fixtures/pull_request.${action}`);
 
-    // just return a test token
-    app.app = () => "test";
-  });
+    let probot;
 
-  test("creates a passing check", async () => {
-    let x = 0;
+    beforeEach(() => {
+      probot = new Probot({});
+      // Load our app into probot
+      const app = probot.load(myProbotApp);
 
-    nock("https://api.github.com")
-      .post("/app/installations/2/access_tokens")
-      .reply(200, { token: "test" });
-
-    nock("https://api.github.com")
-      .post("/repos/thislooksfun/testing/check-runs", body => {
-        body.started_at = "2018-10-05T17:35:21.594Z";
-        body.completed_at = "2018-10-05T17:35:53.683Z";
-        expect(body).toMatchObject(checkRunSuccess);
-        return true;
-      })
-      .reply(200);
-
-    // Receive a webhook event
-    await probot.receive({
-      name: "pull_request.opened",
-      payload: checkSuitePayload,
+      // just return a test token
+      app.app = () => "test";
     });
 
-    expect(nock.isDone()).to.be.true;
-  });
-});
+    // Split common check run pattern into helper function
+    const checkRun = async (checkStatusCompleted, changedFiles, rawFile) => {
+      const n = nock("https://api.github.com");
 
-// For more information about testing with Jest see:
-// https://facebook.github.io/jest/
+      // Authorize
+      n.post("/app/installations/2/access_tokens")
+        .optionally()
+        .reply(200, {
+          token: "test",
+        });
 
-// For more information about testing with Nock see:
-// https://github.com/nock/nock
+      // Create check run
+      n.post(repo + "/check-runs", body => {
+        expect(body).to.include.keys(["started_at"]);
+        body.started_at = "2018-10-05T17:35:21.594Z";
+        expect(body).to.eql(checkStatusStarted, "creating check run");
+        return true;
+      }).reply(200, { id: 1234 });
+
+      // Get file list
+      n.get(repo + "/pulls/13/files").reply(200, changedFiles);
+
+      if (rawFile != null) {
+        // Get raw file
+        n.get(
+          repo +
+            "/contents/test.js?ref=5895325eeffebdcaae991ae28dcf0ce68b7abe89"
+        ).reply(200, rawFile);
+      }
+
+      // Update check run
+      n.patch(repo + "/check-runs/1234", body => {
+        expect(body).to.include.keys(["started_at", "completed_at"]);
+        body.started_at = "2018-10-05T17:35:21.594Z";
+        body.completed_at = "2018-10-05T17:35:53.683Z";
+        expect(body).to.eql(checkStatusCompleted, "updating check run");
+        return true;
+      }).reply(200);
+
+      // Receive a webhook event
+      await probot.receive({ name: `pull_request.${action}`, payload });
+
+      // Make sure it actually did all the steps
+      expect(n.isDone()).to.be.true;
+    };
+
+    describe("Non-matching files", () => {
+      // Requiring our fixtures
+      const checkStatusSuccess = require("../fixtures/non-matching/check_status.success");
+      const changedFiles = require("../fixtures/non-matching/changedFiles");
+
+      it("creates a passing check", () =>
+        checkRun(checkStatusSuccess, changedFiles));
+    });
+
+    describe("Matching files", () => {
+      const changedFiles = require("../fixtures/matching/changedFiles");
+
+      describe("That contain .only", () => {
+        const checkStatusFailure = require("../fixtures/matching/containing/check_status.failure");
+        const rawFile = fs.readFileSync(
+          path.join(__dirname, "../fixtures/invalid/it.only.js")
+        );
+
+        it("creates a failing check", () =>
+          checkRun(checkStatusFailure, changedFiles, rawFile));
+      });
+
+      describe("That do not contain .only", () => {
+        const checkStatusSuccess = require("../fixtures/matching/missing/check_status.success");
+        const rawFile = fs.readFileSync(
+          path.join(__dirname, "../fixtures/valid/standard.js")
+        );
+
+        it("creates a passing check", () =>
+          checkRun(checkStatusSuccess, changedFiles, rawFile));
+      });
+    });
+  }
+);

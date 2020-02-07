@@ -1,0 +1,13 @@
+{
+  "head_sha": "5895325eeffebdcaae991ae28dcf0ce68b7abe89",
+  "name": "forbid.only",
+  "started_at": "2018-10-05T17:35:21.594Z",
+  "completed_at": "2018-10-05T17:35:53.683Z",
+  "conclusion": "success",
+  "output": {
+    "title": "Found 0 problems",
+    "summary": "Scanned 0 files and found 0 instances of `.only` calls.",
+    "text": "<details><summary>Scanned 0 files</summary><pre></pre></details><details><summary>Skipped 1 file</summary><pre>README.md (No parser for file type .md)</pre></details>",
+    "annotations": []
+  }
+}

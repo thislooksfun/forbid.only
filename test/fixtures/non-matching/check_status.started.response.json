@@ -1,0 +1,87 @@
+{
+  "id": 1234,
+  "node_id": "MDg6Q2hlY2tSdW40MzA5NTk3NTQ=",
+  "head_sha": "536fd7a7f07ba1e6b636164eeea72fb5d198787a",
+  "external_id": "",
+  "url": "https://api.github.com/repos/thislooksfun/f.o.testing/check-runs/1234",
+  "html_url": "https://github.com/thislooksfun/f.o.testing/runs/1234",
+  "details_url": "https://github.com/thislooksfun/forbid.only",
+  "status": "in_progress",
+  "conclusion": null,
+  "started_at": "2020-02-07T00:57:01Z",
+  "completed_at": null,
+  "output": {
+    "title": null,
+    "summary": null,
+    "text": null,
+    "annotations_count": 0,
+    "annotations_url": "https://api.github.com/repos/thislooksfun/f.o.testing/check-runs/1234/annotations"
+  },
+  "name": "forbid.only",
+  "check_suite": {
+    "id": 4321
+  },
+  "app": {
+    "id": 53184,
+    "slug": "forbid-only-dev2",
+    "node_id": "MDM6QXBwNTMxODQ=",
+    "owner": {
+      "login": "thislooksfun",
+      "id": 5367333,
+      "node_id": "MDQ6VXNlcjUzNjczMzM=",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/5367333?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/thislooksfun",
+      "html_url": "https://github.com/thislooksfun",
+      "followers_url": "https://api.github.com/users/thislooksfun/followers",
+      "following_url": "https://api.github.com/users/thislooksfun/following{/other_user}",
+      "gists_url": "https://api.github.com/users/thislooksfun/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/thislooksfun/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/thislooksfun/subscriptions",
+      "organizations_url": "https://api.github.com/users/thislooksfun/orgs",
+      "repos_url": "https://api.github.com/users/thislooksfun/repos",
+      "events_url": "https://api.github.com/users/thislooksfun/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/thislooksfun/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "name": "forbid.only-dev2",
+    "description": "Forbid pull requests that still have .only tests in them",
+    "external_url": "https://github.com/thislooksfun/forbid.only",
+    "html_url": "https://github.com/apps/forbid-only-dev2",
+    "created_at": "2020-02-06T16:52:46Z",
+    "updated_at": "2020-02-06T16:52:46Z",
+    "permissions": {
+      "checks": "write",
+      "metadata": "read",
+      "pull_requests": "read",
+      "single_file": "read"
+    },
+    "events": ["pull_request"]
+  },
+  "pull_requests": [
+    {
+      "url": "https://api.github.com/repos/thislooksfun/f.o.testing/pulls/13",
+      "id": 372016415,
+      "number": 13,
+      "head": {
+        "ref": "thislooksfun-patch-9",
+        "sha": "536fd7a7f07ba1e6b636164eeea72fb5d198787a",
+        "repo": {
+          "id": 208174831,
+          "url": "https://api.github.com/repos/thislooksfun/f.o.testing",
+          "name": "f.o.testing"
+        }
+      },
+      "base": {
+        "ref": "master",
+        "sha": "6a4ad60460ecc4ec618a53c6a5538573e075d99d",
+        "repo": {
+          "id": 208174831,
+          "url": "https://api.github.com/repos/thislooksfun/f.o.testing",
+          "name": "f.o.testing"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "head_sha": "5895325eeffebdcaae991ae28dcf0ce68b7abe89",
+  "name": "forbid.only",
+  "started_at": "2018-10-05T17:35:21.594Z",
+  "conclusion": "success",
+  "completed_at": "2018-10-05T17:35:53.683Z",
+  "output": {
+    "title": "Found 0 problems",
+    "summary": "Scanned 1 files and found 0 instances of `.only` calls.",
+    "text": "<details><summary>Scanned 1 file</summary><pre>test.js</pre></details><details><summary>Skipped 0 files</summary><pre></pre></details>",
+    "annotations": []
+  }
+}

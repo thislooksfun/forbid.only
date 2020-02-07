@@ -1,0 +1,24 @@
+{
+  "head_sha": "5895325eeffebdcaae991ae28dcf0ce68b7abe89",
+  "name": "forbid.only",
+  "started_at": "2018-10-05T17:35:21.594Z",
+  "completed_at": "2018-10-05T17:35:53.683Z",
+  "conclusion": "failure",
+  "output": {
+    "title": "Found 1 problem",
+    "summary": "Scanned 1 files and found 1 instances of `.only` calls.",
+    "text": "<details><summary>Scanned 1 file</summary><pre>test.js</pre></details><details><summary>Skipped 0 files</summary><pre></pre></details>",
+    "annotations": [
+      {
+        "start_line": 3,
+        "end_line": 3,
+        "start_column": 5,
+        "end_column": 9,
+        "path": "test.js",
+        "annotation_level": "failure",
+        "title": "Found `.only`",
+        "message": "You appear to have left a test marked with `.only`. This will prevent other tests from running, and will affect the accuracy of test runs.\n\nIf you really want to include this line you can put `// forbid.only::skip-next-line` on the previous line."
+      }
+    ]
+  }
+}
