@@ -3,7 +3,7 @@ const path = require("path");
 const nock = require("nock");
 // Requiring our app implementation
 const myProbotApp = require("../..");
-const { Probot, createProbot } = require("probot");
+const { createProbot } = require("probot");
 // Requiring our common fixtures
 const checkStatusStarted = require("../fixtures/check_status.started");
 
