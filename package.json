@@ -16,8 +16,8 @@
     "dev": "nodemon",
     "start": "probot run ./index.js",
     "test": "jest",
+    "lint": "prettier --check '**/*'",
     "test:watch": "jest --watch --notify --notifyMode=change --coverage",
-    "prettier:check": "prettier --check '**/*'",
     "prettier:fix": "prettier --write '**/*'"
   },
   "dependencies": {
