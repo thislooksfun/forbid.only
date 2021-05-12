@@ -21,7 +21,7 @@
     "prettier:fix": "prettier --write '**/*'"
   },
   "dependencies": {
-    "acorn": "^7.1.0",
+    "acorn": "^7.1.1",
     "acorn-walk": "^7.0.0",
     "body-parser": "^1.19.0",
     "new-github-issue-url": "^0.2.1",
